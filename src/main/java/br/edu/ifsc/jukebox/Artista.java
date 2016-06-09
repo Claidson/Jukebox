@@ -13,5 +13,5 @@ import java.util.TreeSet;
  */
 public class Artista {
     String artista;
-    TreeSet<Album> albuns;
+    TreeSet<Musica> musicas;
 }
