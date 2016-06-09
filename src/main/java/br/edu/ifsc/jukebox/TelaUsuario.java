@@ -6,7 +6,6 @@
 package br.edu.ifsc.jukebox;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 
 /**
@@ -15,7 +14,7 @@ import javax.swing.DefaultListModel;
  */
 public class TelaUsuario extends javax.swing.JFrame {
     DefaultListModel modelo = new DefaultListModel();
-    private Junkebox junkebox;
+    private JukeboxController jukebox;
 
     /**
      * Creates new form Tela
@@ -25,7 +24,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         this.setContentPane(new FundoBg());
         getContentPane().setBackground(Color.black);
         initComponents();
-        junkebox = new Junkebox();
+        jukebox = new JukeboxController();
     }
 
     /**
@@ -208,14 +207,14 @@ public class TelaUsuario extends javax.swing.JFrame {
     /**
      * @return the junkebox
      */
-    public Junkebox getJunkebox() {
-        return junkebox;
+    public JukeboxController getJunkebox() {
+        return jukebox;
     }
 
     /**
      * @param junkebox the junkebox to set
      */
-    public void setJunkebox(Junkebox junkebox) {
-        this.junkebox = junkebox;
+    public void setJunkebox(JukeboxController junkebox) {
+        this.jukebox = junkebox;
     }
 }
