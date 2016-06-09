@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifsc.jukebox;
 
 import java.awt.BorderLayout;
@@ -29,7 +24,7 @@ public class FundoBg extends JPanel {
     }
 
     protected void initialize() {
-        this.image = this.getImage("/fundo.png");
+        this.image = this.getImage("/fundo.jpg");
         this.setLayout(new BorderLayout());
     }
 
