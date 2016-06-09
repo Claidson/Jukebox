@@ -6,6 +6,7 @@
 package br.edu.ifsc.jukebox;
 
 import java.awt.Color;
+import java.util.ArrayList;;
 import javax.swing.DefaultListModel;
 
 /**
@@ -15,6 +16,8 @@ import javax.swing.DefaultListModel;
 public class TelaUsuario extends javax.swing.JFrame {
     DefaultListModel modelo = new DefaultListModel();
     private JukeboxController jukebox;
+    ArrayList<Artista> listar;
+    boolean m;
     
 
     /**
@@ -26,6 +29,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         getContentPane().setBackground(Color.black);
         initComponents();
         jukebox = new JukeboxController();
+        mostrarArtistas();
     }
 
     /**
@@ -40,15 +44,16 @@ public class TelaUsuario extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        jListListaArtistas = new javax.swing.JList();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jButtonTocar = new javax.swing.JButton();
+        jButtonConfig = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList();
+        jListTocarMusicas = new javax.swing.JList();
+        jButtonVoltar = new javax.swing.JButton();
 
         jList2.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -59,23 +64,34 @@ public class TelaUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        jListListaArtistas.setModel(modelo);
+        jScrollPane1.setViewportView(jListListaArtistas);
 
         jButton2.setText("<");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText(">");
-
-        jButton4.setText("Tocar");
-
-        jButton5.setText("Conf");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButtonTocar.setText("Tocar");
+        jButtonTocar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTocarActionPerformed(evt);
+            }
+        });
+
+        jButtonConfig.setText("Conf");
+        jButtonConfig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfigActionPerformed(evt);
             }
         });
 
@@ -87,12 +103,15 @@ public class TelaUsuario extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Proxima");
 
-        jList3.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+        jListTocarMusicas.setModel(modelo);
+        jScrollPane3.setViewportView(jListTocarMusicas);
+
+        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVoltarActionPerformed(evt);
+            }
         });
-        jScrollPane3.setViewportView(jList3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,9 +136,10 @@ public class TelaUsuario extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2)
                             .addComponent(jButton3)
-                            .addComponent(jButton4))
+                            .addComponent(jButtonTocar))
                         .addGap(46, 46, 46))
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jButtonConfig, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonVoltar))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -139,9 +159,11 @@ public class TelaUsuario extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)
-                        .addGap(69, 69, 69)
-                        .addComponent(jButton5))
+                        .addComponent(jButtonTocar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonVoltar)
+                        .addGap(40, 40, 40)
+                        .addComponent(jButtonConfig))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17))
         );
@@ -149,10 +171,57 @@ public class TelaUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButtonConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfigActionPerformed
         new TelaGerenciador().setVisible(true);
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jButtonConfigActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        int select = jListListaArtistas.getSelectedIndex();
+        if (select!=0){
+            jListListaArtistas.setSelectedIndex(select-1);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int select = jListListaArtistas.getSelectedIndex();
+        if (select!=jukebox.getArtistas().size()-1){
+            jListListaArtistas.setSelectedIndex(select+1);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButtonTocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTocarActionPerformed
+        // TODO add your handling code here:
+        if (!m){
+        Artista select = (Artista) jListListaArtistas.getSelectedValue();
+        for (Musica musica:select.musicas){
+                ((DefaultListModel)(jListListaArtistas.getModel()))
+               .addElement(musica.musica);
+            }
+        jListListaArtistas.setSelectedIndex(0);
+        m=true;
+        }else{
+            
+            
+        }
+        
+    }//GEN-LAST:event_jButtonTocarActionPerformed
+
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
+        // TODO add your handling code here:
+        mostrarArtistas();
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
+    private void mostrarArtistas(){
+        ((DefaultListModel)(jListListaArtistas.getModel())).clear();
+        listar = jukebox.getArtistas();
+        for (Artista artista:listar){
+                ((DefaultListModel)(jListListaArtistas.getModel()))
+               .addElement(artista.artista);
+            }
+        jListListaArtistas.setSelectedIndex(0);
+        m=false;
+    }
     /**
      * @param args the command line arguments
      */
@@ -193,13 +262,14 @@ public class TelaUsuario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButtonConfig;
+    private javax.swing.JButton jButtonTocar;
+    private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JList jList1;
     private javax.swing.JList jList2;
-    private javax.swing.JList jList3;
+    private javax.swing.JList jListListaArtistas;
+    private javax.swing.JList jListTocarMusicas;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
