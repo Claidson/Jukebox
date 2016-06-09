@@ -21,5 +21,15 @@ public class JukeboxController {
         public void addArtista(Artista artista){
             artistas.add(artista);
         }
+
+    public ArrayList<Artista> getArtistas() {
+        return artistas;
+    }
+
+    public void setArtistas(ArrayList<Artista> artistas) {
+        this.artistas = artistas;
+    }
+        
+        
     
 }
