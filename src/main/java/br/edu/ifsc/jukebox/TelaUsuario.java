@@ -15,6 +15,7 @@ import javax.swing.DefaultListModel;
 public class TelaUsuario extends javax.swing.JFrame {
     DefaultListModel modelo = new DefaultListModel();
     private JukeboxController jukebox;
+    
 
     /**
      * Creates new form Tela

@@ -11,11 +11,11 @@ import java.util.ArrayList;
  *
  * @author Aluno
  */
-public class Junkebox {
+public class JukeboxController {
     
-        ArrayList<Artista> artistas;
+        private ArrayList<Artista> artistas;
         
-        public Junkebox(){
+        public JukeboxController(){
             artistas = new ArrayList<>();
         }
         public void addArtista(Artista artista){
