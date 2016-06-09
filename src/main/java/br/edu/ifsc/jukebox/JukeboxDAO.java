@@ -11,17 +11,19 @@ import java.util.ArrayList;
  *
  * @author Aluno
  */
-public class JukeboxController {
+public class JukeboxDAO {
 
     private ArrayList<Artista> artistas;
-    private JukeboxDAO dao = new JukeboxDAO();
-
-    public JukeboxController() {
-        artistas = new ArrayList<>();
-    }
 
     public void addArtista(Artista artista) {
         artistas.add(artista);
+    }
+
+    public JukeboxDAO() {
+    }
+
+    public JukeboxDAO(ArrayList<Artista> artistas) {
+        this.artistas = artistas;
     }
 
     public ArrayList<Artista> getArtistas() {
