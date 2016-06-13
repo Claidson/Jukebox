@@ -6,6 +6,7 @@
 package br.edu.ifsc.jukebox;
 
 import java.awt.Color;
+import java.io.File;
 import java.util.ArrayList;;
 import javax.swing.DefaultListModel;
 
@@ -16,7 +17,10 @@ import javax.swing.DefaultListModel;
 public class TelaUsuario extends javax.swing.JFrame {
     DefaultListModel modelo = new DefaultListModel();
     private JukeboxController jukebox;
+    public static MP3Musica player = new MP3Musica();
+    public static int indice;
     ArrayList<Artista> listar;
+    public static ArrayList<Musica> musicas;
     boolean m;
     
 
@@ -29,6 +33,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         getContentPane().setBackground(Color.black);
         initComponents();
         jukebox = new JukeboxController();
+        indice = 0;
         mostrarArtistas();
     }
 
@@ -202,7 +207,13 @@ public class TelaUsuario extends javax.swing.JFrame {
         jListListaArtistas.setSelectedIndex(0);
         m=true;
         }else{
+            Musica select = (Musica) jListListaArtistas.getSelectedValue();
+            musicas.add(select);
             
+                if (!player.isAlive()) {
+                    File musica=new File(select.path);
+                    player.tocar(musica);
+                }
             
         }
         
@@ -222,6 +233,14 @@ public class TelaUsuario extends javax.swing.JFrame {
         jListListaArtistas.setSelectedIndex(0);
         m=false;
     }
+   public void mostrarMusicas(){
+       ((DefaultListModel)(jListTocarMusicas.getModel())).clear();
+        
+        for (Musica musica:musicas){
+                ((DefaultListModel)(jListTocarMusicas.getModel()))
+               .addElement(musica.musica);
+            }
+   }
     /**
      * @param args the command line arguments
      */
