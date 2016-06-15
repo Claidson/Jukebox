@@ -200,7 +200,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!m){
         Artista select = (Artista) jListListaArtistas.getSelectedValue();
-        for (Musica musica:select.musicas){
+        for (Musica musica:select.getMusicas()){
                 ((DefaultListModel)(jListListaArtistas.getModel()))
                .addElement(musica.musica);
             }
@@ -228,7 +228,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         listar = jukebox.getArtistas();
         for (Artista artista:listar){
                 ((DefaultListModel)(jListListaArtistas.getModel()))
-               .addElement(artista.artista);
+               .addElement(artista.getArtista());
             }
         jListListaArtistas.setSelectedIndex(0);
         m=false;
