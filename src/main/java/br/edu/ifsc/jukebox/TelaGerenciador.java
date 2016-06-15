@@ -6,8 +6,6 @@
 package br.edu.ifsc.jukebox;
 
 import java.io.File;
-import java.util.ArrayList;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -21,11 +19,25 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class TelaGerenciador extends javax.swing.JFrame {
 
     JukeboxController controle;
+public void preencheComboBoxArtista(JComboBox cmb) {
+        String str;
+        for (int i = 0; i < controle.getArtistas().size(); i++) {
+            if (controle.getArtistas().get(i).equals("")) {
+                str = "Nenhum artista cadastrado.";
+                cmb.add(str, cmb);
+                break;
+            } else {
+                str = (String) controle.getArtistas().get(i).toString();
+                cmb.add(str, cmb);
+            }
+        }
+    }
 
     public TelaGerenciador() {
         initComponents();
         controle = new JukeboxController();
 
+        preencheComboBoxArtista(jCBArtistas);
         // jComboBox2=new JComboBox(new DefaultComboBoxModel(.toArray()));
     }
 
@@ -41,7 +53,7 @@ public class TelaGerenciador extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jButtonSelecionaMp3 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox();
+        jCBArtistas = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -63,10 +75,10 @@ public class TelaGerenciador extends javax.swing.JFrame {
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        jCBArtistas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBArtistas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                jCBArtistasActionPerformed(evt);
             }
         });
 
@@ -82,7 +94,7 @@ public class TelaGerenciador extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCBArtistas, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                         .addComponent(jButton4)
                         .addGap(46, 46, 46))
@@ -97,7 +109,7 @@ public class TelaGerenciador extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jButton4)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBArtistas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -125,15 +137,14 @@ public class TelaGerenciador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void jCBArtistasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBArtistasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_jCBArtistasActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        // Artista novo = new Artista();
-        // novo.setArtista(JOptionPane.showInputDialog("Nome do artista"));
-        // TelaUsuario.get.addArtista(novo);
+       Artista novo = new Artista();
+        novo.setArtista(JOptionPane.showInputDialog("Nome do artista:"));
+        preencheComboBoxArtista(jCBArtistas);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButtonSelecionaMp3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionaMp3ActionPerformed
@@ -190,7 +201,7 @@ public class TelaGerenciador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButtonSelecionaMp3;
-    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox jCBArtistas;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;

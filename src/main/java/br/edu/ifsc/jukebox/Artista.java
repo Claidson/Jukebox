@@ -12,6 +12,24 @@ import java.util.TreeSet;
  * @author Aluno
  */
 public class Artista {
-    String artista;
-    TreeSet<Musica> musicas;
+    private String artista;
+    private TreeSet<Musica> musicas;
+
+    public String getArtista() {
+        return artista;
+    }
+
+    public void setArtista(String artista) {
+        this.artista = artista;
+    }
+
+    public TreeSet<Musica> getMusicas() {
+        return musicas;
+    }
+
+    public void setMusicas(TreeSet<Musica> musicas) {
+        this.musicas = musicas;
+    }
+    
+    
 }
