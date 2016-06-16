@@ -6,7 +6,13 @@
 package br.edu.ifsc.jukebox;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -19,7 +25,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class TelaGerenciador extends javax.swing.JFrame {
 
-    Artista novo;
+    Artista novoArtista;
+    String mp3;
     JukeboxController controle;
 
     public void preencheComboBoxArtista() {
@@ -29,6 +36,18 @@ public class TelaGerenciador extends javax.swing.JFrame {
         for (int i = 0; i < artistas.size(); i++) {
             Artista artista = artistas.get(i);
             comboModel.addElement(artista.getArtista());
+        }
+    }
+
+    public void copiar(File fonte, File destino) {
+        try {
+            FileChannel in = new FileInputStream(fonte).getChannel();
+            FileChannel out = new FileOutputStream(destino).getChannel();
+            out.transferFrom(in, 0, in.size());
+            in.close();
+            out.close();
+        } catch (IOException ex) {
+            System.out.println("Erro na copia");
         }
     }
 
@@ -144,9 +163,9 @@ public class TelaGerenciador extends javax.swing.JFrame {
     }//GEN-LAST:event_jCBArtistasActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        novo = new Artista();
-        novo.setArtista(JOptionPane.showInputDialog("Nome do artista:"));
-        controle.addArtista(novo);
+        novoArtista = new Artista();
+        novoArtista.setArtista(JOptionPane.showInputDialog("Nome do artista:"));
+        controle.addArtista(novoArtista);
         preencheComboBoxArtista();
 
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -159,8 +178,10 @@ public class TelaGerenciador extends javax.swing.JFrame {
         int retorno = fileChooser.showOpenDialog(null);
         if (retorno == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            fil
-           // controle.(file);
+            File copia = new File("./" + file.getName());
+            copiar(file, copia);
+            mp3 = copia.getAbsolutePath();
+            System.out.println("mp3 "+copia.getAbsolutePath());
             JOptionPane.showMessageDialog(this, "Arquivo mp3 importado para pasta do projeto\n", "Importação", JOptionPane.INFORMATION_MESSAGE);
 
         } else {
