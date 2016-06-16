@@ -6,7 +6,8 @@
 package br.edu.ifsc.jukebox;
 
 import java.io.File;
-import javax.swing.JComboBox;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
@@ -18,31 +19,26 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class TelaGerenciador extends javax.swing.JFrame {
 
+    Artista novo;
     JukeboxController controle;
-public void preencheComboBoxArtista(JComboBox cmb) {
-        String str;
-        for (int i = 0; i < controle.getArtistas().size(); i++) {
-            if (controle.getArtistas().get(i).equals("")) {
-                str = "Nenhum artista cadastrado.";
-                cmb.add(str, cmb);
-                break;
-            } else {
-                str = (String) controle.getArtistas().get(i).toString();
-                cmb.add(str, cmb);
-            }
+
+    public void preencheComboBoxArtista() {
+        DefaultComboBoxModel comboModel = (DefaultComboBoxModel) jCBArtistas.getModel();
+        comboModel.removeAllElements();
+        List<Artista> artistas = controle.getArtistas();
+        for (int i = 0; i < artistas.size(); i++) {
+            Artista artista = artistas.get(i);
+            comboModel.addElement(artista.getArtista());
         }
     }
 
     public TelaGerenciador() {
         initComponents();
         controle = new JukeboxController();
+        preencheComboBoxArtista();
 
-        preencheComboBoxArtista(jCBArtistas);
-        // jComboBox2=new JComboBox(new DefaultComboBoxModel(.toArray()));
     }
 
-   
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -54,6 +50,7 @@ public void preencheComboBoxArtista(JComboBox cmb) {
         jButton4 = new javax.swing.JButton();
         jButtonSelecionaMp3 = new javax.swing.JButton();
         jCBArtistas = new javax.swing.JComboBox();
+        jBCadastrarMp3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -75,12 +72,13 @@ public void preencheComboBoxArtista(JComboBox cmb) {
             }
         });
 
-        jCBArtistas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jCBArtistas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBArtistasActionPerformed(evt);
             }
         });
+
+        jBCadastrarMp3.setText("Cadastrar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -94,13 +92,15 @@ public void preencheComboBoxArtista(JComboBox cmb) {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jCBArtistas, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonSelecionaMp3)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBCadastrarMp3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCBArtistas, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                         .addComponent(jButton4)
-                        .addGap(46, 46, 46))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButtonSelecionaMp3)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(46, 46, 46))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,7 +114,9 @@ public void preencheComboBoxArtista(JComboBox cmb) {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jButtonSelecionaMp3))
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(jBCadastrarMp3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Adicionar", jPanel1);
@@ -142,9 +144,11 @@ public void preencheComboBoxArtista(JComboBox cmb) {
     }//GEN-LAST:event_jCBArtistasActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       Artista novo = new Artista();
+        novo = new Artista();
         novo.setArtista(JOptionPane.showInputDialog("Nome do artista:"));
-        preencheComboBoxArtista(jCBArtistas);
+        controle.addArtista(novo);
+        preencheComboBoxArtista();
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButtonSelecionaMp3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionaMp3ActionPerformed
@@ -155,7 +159,8 @@ public void preencheComboBoxArtista(JComboBox cmb) {
         int retorno = fileChooser.showOpenDialog(null);
         if (retorno == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            //controle.(file);
+            fil
+           // controle.(file);
             JOptionPane.showMessageDialog(this, "Arquivo mp3 importado para pasta do projeto\n", "Importação", JOptionPane.INFORMATION_MESSAGE);
 
         } else {
@@ -199,6 +204,7 @@ public void preencheComboBoxArtista(JComboBox cmb) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBCadastrarMp3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButtonSelecionaMp3;
     private javax.swing.JComboBox jCBArtistas;
