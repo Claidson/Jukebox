@@ -45,11 +45,14 @@ public class MP3Musica extends Thread {
             System.out.println("Tocando Musica!");
 
             this.player.play();
+            System.out.println("aqui");
             TelaUsuario.musicas.remove(TelaUsuario.musicas.get(TelaUsuario.indice++));
+            System.out.println("as");
             if(!TelaUsuario.musicas.isEmpty()){
             File musica = new File(TelaUsuario.musicas.get(TelaUsuario.indice).path);
             TelaUsuario.player.tocar(musica);
-                    }
+            TelaUsuario.player.start();
+                   }
 
         } catch (Exception e) {
             System.out.println("Problema ao tocar Musica" + mp3);

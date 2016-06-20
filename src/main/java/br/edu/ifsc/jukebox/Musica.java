@@ -12,5 +12,8 @@ package br.edu.ifsc.jukebox;
 public class Musica {
     String musica;
     String path;
-    
+    @Override
+ public String toString(){
+     return musica;
+ }
 }

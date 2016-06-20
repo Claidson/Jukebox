@@ -7,8 +7,9 @@ package br.edu.ifsc.jukebox;
 
 import java.awt.Color;
 import java.io.File;
-import java.util.ArrayList;;
+import java.util.ArrayList;import java.util.TreeSet;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +17,7 @@ import javax.swing.DefaultListModel;
  */
 public class TelaUsuario extends javax.swing.JFrame {
     DefaultListModel modelo = new DefaultListModel();
+    DefaultListModel modelo2 = new DefaultListModel();
     private JukeboxController jukebox;
     public static MP3Musica player = new MP3Musica();
     public static int indice;
@@ -34,6 +36,24 @@ public class TelaUsuario extends javax.swing.JFrame {
         initComponents();
         jukebox = new JukeboxController();
         indice = 0;
+        musicas = new ArrayList<>();
+        m=false;
+        
+        Artista novo = new Artista();
+        novo.setArtista("Teste");
+        
+        
+        Artista novo2 = new Artista();
+        novo2.setArtista("Teste2");
+        jukebox.addArtista(novo2);
+        ArrayList<Musica> novoMusicas = new ArrayList<>();
+        Musica novaMusica = new Musica();
+        novaMusica.path = "C:\\Users\\Aluno\\Documents\\NetBeansProjects\\Jukebox1\\src\\main\\resources\\teste.mp3";
+        novaMusica.musica = "Back";
+        novoMusicas.add(novaMusica);
+        novo.setMusicas(novoMusicas);
+        jukebox.addArtista(novo);
+        
         mostrarArtistas();
     }
 
@@ -108,7 +128,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Proxima");
 
-        jListTocarMusicas.setModel(modelo);
+        jListTocarMusicas.setModel(modelo2);
         jScrollPane3.setViewportView(jListTocarMusicas);
 
         jButtonVoltar.setText("Voltar");
@@ -200,19 +220,29 @@ public class TelaUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!m){
         Artista select = (Artista) jListListaArtistas.getSelectedValue();
-        for (Musica musica:select.getMusicas()){
+        ((DefaultListModel)(jListListaArtistas.getModel())).clear();
+                
+                for (Musica musica:select.getMusicas()){
                 ((DefaultListModel)(jListListaArtistas.getModel()))
-               .addElement(musica.musica);
-            }
+               .addElement(musica);
+                
+                m=true;
+                
+                }
+            
+        
         jListListaArtistas.setSelectedIndex(0);
-        m=true;
+        
         }else{
             Musica select = (Musica) jListListaArtistas.getSelectedValue();
-            musicas.add(select);
             
-                if (!player.isAlive()) {
+            musicas.add(select);
+            mostrarMusicas();
+           
+               if (!player.isAlive()) {
                     File musica=new File(select.path);
                     player.tocar(musica);
+                    player.start();
                 }
             
         }
@@ -228,7 +258,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         listar = jukebox.getArtistas();
         for (Artista artista:listar){
                 ((DefaultListModel)(jListListaArtistas.getModel()))
-               .addElement(artista.getArtista());
+               .addElement(artista);
             }
         jListListaArtistas.setSelectedIndex(0);
         m=false;

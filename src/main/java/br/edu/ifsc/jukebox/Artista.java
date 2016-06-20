@@ -5,6 +5,7 @@
  */
 package br.edu.ifsc.jukebox;
 
+import java.util.ArrayList;
 import java.util.TreeSet;
 
 /**
@@ -13,7 +14,7 @@ import java.util.TreeSet;
  */
 public class Artista {
     private String artista;
-    private TreeSet<Musica> musicas;
+    private ArrayList<Musica> musicas;
 
     public String getArtista() {
         return artista;
@@ -23,13 +24,16 @@ public class Artista {
         this.artista = artista;
     }
 
-    public TreeSet<Musica> getMusicas() {
+    public ArrayList<Musica> getMusicas() {
         return musicas;
     }
 
-    public void setMusicas(TreeSet<Musica> musicas) {
+    public void setMusicas(ArrayList<Musica> musicas) {
         this.musicas = musicas;
     }
-    
+    @Override
+    public String toString(){
+        return artista;
+    }
     
 }
