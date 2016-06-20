@@ -4,6 +4,7 @@ package br.edu.ifsc.jukebox;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import javax.swing.SwingUtilities;
 import javazoom.jl.player.Player;
 
 /**
@@ -45,14 +46,17 @@ public class MP3Musica extends Thread {
             System.out.println("Tocando Musica!");
 
             this.player.play();
-            System.out.println("aqui");
-            TelaUsuario.musicas.remove(TelaUsuario.musicas.get(TelaUsuario.indice++));
-            System.out.println("as");
-            if(!TelaUsuario.musicas.isEmpty()){
-            File musica = new File(TelaUsuario.musicas.get(TelaUsuario.indice).path);
-            TelaUsuario.player.tocar(musica);
-            TelaUsuario.player.start();
-                   }
+            TelaUsuario.musicas.remove(mp3);
+            
+                File proxima =TelaUsuario.musicas.get(0);
+                if (proxima!=null){
+                    MP3Musica novoPlayer = new MP3Musica();
+                    novoPlayer.tocar(proxima);
+                    novoPlayer.start();
+                   
+                }
+            
+                   
 
         } catch (Exception e) {
             System.out.println("Problema ao tocar Musica" + mp3);

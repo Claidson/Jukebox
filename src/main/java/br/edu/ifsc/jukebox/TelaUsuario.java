@@ -22,7 +22,7 @@ public class TelaUsuario extends javax.swing.JFrame {
     public static MP3Musica player = new MP3Musica();
     public static int indice;
     ArrayList<Artista> listar;
-    public static ArrayList<Musica> musicas;
+    public static ArrayList<File> musicas;
     boolean m;
     
 
@@ -45,15 +45,22 @@ public class TelaUsuario extends javax.swing.JFrame {
         
         Artista novo2 = new Artista();
         novo2.setArtista("Teste2");
-        jukebox.addArtista(novo2);
+        
         ArrayList<Musica> novoMusicas = new ArrayList<>();
         Musica novaMusica = new Musica();
-        novaMusica.path = "C:\\Users\\Aluno\\Documents\\NetBeansProjects\\Jukebox1\\src\\main\\resources\\teste.mp3";
+        novaMusica.path = "C:\\Users\\Aluno\\Documents\\NetBeansProjects\\Jukebox\\src\\main\\resources\\teste.mp3";
         novaMusica.musica = "Back";
         novoMusicas.add(novaMusica);
         novo.setMusicas(novoMusicas);
         jukebox.addArtista(novo);
         
+        ArrayList<Musica> novoMusicas2 = new ArrayList<>();
+        Musica novaMusica2 = new Musica();
+        novaMusica2.path = "C:\\Users\\Aluno\\Documents\\NetBeansProjects\\Jukebox\\src\\main\\resources\\01 - Hells Bells.mp3";
+        novaMusica2.musica = "01 - Hells Bells";
+        novoMusicas2.add(novaMusica2);
+        novo2.setMusicas(novoMusicas2);
+        jukebox.addArtista(novo2);
         mostrarArtistas();
     }
 
@@ -235,12 +242,12 @@ public class TelaUsuario extends javax.swing.JFrame {
         
         }else{
             Musica select = (Musica) jListListaArtistas.getSelectedValue();
-            
-            musicas.add(select);
+            File musica=new File(select.path);
+            musicas.add(musica);
             mostrarMusicas();
            
                if (!player.isAlive()) {
-                    File musica=new File(select.path);
+                    
                     player.tocar(musica);
                     player.start();
                 }
@@ -252,6 +259,7 @@ public class TelaUsuario extends javax.swing.JFrame {
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
         // TODO add your handling code here:
         mostrarArtistas();
+        mostrarMusicas();
     }//GEN-LAST:event_jButtonVoltarActionPerformed
     private void mostrarArtistas(){
         ((DefaultListModel)(jListListaArtistas.getModel())).clear();
@@ -263,12 +271,13 @@ public class TelaUsuario extends javax.swing.JFrame {
         jListListaArtistas.setSelectedIndex(0);
         m=false;
     }
+    
    public void mostrarMusicas(){
        ((DefaultListModel)(jListTocarMusicas.getModel())).clear();
         
-        for (Musica musica:musicas){
+        for (File musica:musicas){
                 ((DefaultListModel)(jListTocarMusicas.getModel()))
-               .addElement(musica.musica);
+               .addElement(musica);
             }
    }
     /**
