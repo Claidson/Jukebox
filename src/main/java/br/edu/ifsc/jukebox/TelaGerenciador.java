@@ -11,8 +11,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -54,7 +52,7 @@ public class TelaGerenciador extends javax.swing.JFrame {
     public TelaGerenciador() {
         initComponents();
         controle = new JukeboxController();
-        preencheComboBoxArtista();
+     //   preencheComboBoxArtista();
 
     }
 
@@ -70,6 +68,7 @@ public class TelaGerenciador extends javax.swing.JFrame {
         jButtonSelecionaMp3 = new javax.swing.JButton();
         jCBArtistas = new javax.swing.JComboBox();
         jBCadastrarMp3 = new javax.swing.JButton();
+        jLabelTitMp3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -98,6 +97,11 @@ public class TelaGerenciador extends javax.swing.JFrame {
         });
 
         jBCadastrarMp3.setText("Cadastrar");
+        jBCadastrarMp3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCadastrarMp3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -109,17 +113,17 @@ public class TelaGerenciador extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel4))
                 .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButtonSelecionaMp3)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jBCadastrarMp3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCBArtistas, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                        .addComponent(jButton4)
-                        .addGap(46, 46, 46))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelTitMp3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jBCadastrarMp3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCBArtistas, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addGap(46, 46, 46))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +136,8 @@ public class TelaGerenciador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jButtonSelecionaMp3))
+                    .addComponent(jButtonSelecionaMp3)
+                    .addComponent(jLabelTitMp3))
                 .addGap(37, 37, 37)
                 .addComponent(jBCadastrarMp3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(87, Short.MAX_VALUE))
@@ -165,7 +170,7 @@ public class TelaGerenciador extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         novoArtista = new Artista();
         novoArtista.setArtista(JOptionPane.showInputDialog("Nome do artista:"));
-        controle.addArtista(novoArtista);
+
         preencheComboBoxArtista();
 
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -181,13 +186,23 @@ public class TelaGerenciador extends javax.swing.JFrame {
             File copia = new File("./" + file.getName());
             copiar(file, copia);
             mp3 = copia.getAbsolutePath();
-            System.out.println("mp3 "+copia.getAbsolutePath());
+            jLabelTitMp3.setText(mp3.toString());
+            System.out.println("mp3 " + mp3.toString());
             JOptionPane.showMessageDialog(this, "Arquivo mp3 importado para pasta do projeto\n", "Importação", JOptionPane.INFORMATION_MESSAGE);
 
         } else {
             // dialogo cancelado
         }
     }//GEN-LAST:event_jButtonSelecionaMp3ActionPerformed
+
+    private void jBCadastrarMp3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarMp3ActionPerformed
+        Musica musica = new Musica();
+        musica.path = mp3;
+        //novoArtista.getMusicas().add(musica);
+        
+        controle.salvar(novoArtista);
+        preencheComboBoxArtista();
+    }//GEN-LAST:event_jBCadastrarMp3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,6 +246,7 @@ public class TelaGerenciador extends javax.swing.JFrame {
     private javax.swing.JComboBox jCBArtistas;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelTitMp3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables

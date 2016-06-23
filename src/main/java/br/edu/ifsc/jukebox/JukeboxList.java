@@ -11,22 +11,14 @@ import java.util.ArrayList;
  *
  * @author Aluno
  */
-public class JukeboxController {
+public class JukeboxList {
+       private ArrayList<Artista> artistas;
 
-    private ArrayList<Artista> artistas;
-    private JukeboxDAO dao = new JukeboxDAO();
-    
-    public boolean salvar(Artista artista){
-        dao.inserir(artista);
-        return true;
+    public JukeboxList(ArrayList<Artista> artistas) {
+        this.artistas = artistas;
     }
 
-    public JukeboxController() {
-        this.artistas = dao.getArtistas();
-    }
-
-    public void addArtista(Artista artista) {
-        artistas.add(artista);
+    public JukeboxList() {
     }
 
     public ArrayList<Artista> getArtistas() {
@@ -36,5 +28,6 @@ public class JukeboxController {
     public void setArtistas(ArrayList<Artista> artistas) {
         this.artistas = artistas;
     }
-
+       
+       
 }
