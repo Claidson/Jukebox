@@ -16,7 +16,7 @@ import javax.swing.DefaultListModel;
 public class TelaUsuario extends javax.swing.JFrame {
     DefaultListModel modelo = new DefaultListModel();
     DefaultListModel modelo2 = new DefaultListModel();
-    private JukeboxController jukebox;
+    
     public static MP3Musica player = new MP3Musica();
     public static int indice;
     ArrayList<Artista> listar;
@@ -32,7 +32,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         this.setContentPane(new FundoBg());
         getContentPane().setBackground(Color.black);
         initComponents();
-        jukebox = new JukeboxController();
+       
         indice = 0;
         musicas = new ArrayList<>();
         m=false;
@@ -214,6 +214,7 @@ public class TelaUsuario extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        JukeboxController jukebox = new JukeboxController();
         int select = jListListaArtistas.getSelectedIndex();
         if (select!=jukebox.getArtistas().size()-1){
             jListListaArtistas.setSelectedIndex(select+1);
@@ -258,6 +259,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         mostrarMusicas();
     }//GEN-LAST:event_jButtonVoltarActionPerformed
     private void mostrarArtistas(){
+        JukeboxController jukebox = new JukeboxController();
         ((DefaultListModel)(jListListaArtistas.getModel())).clear();
         listar = jukebox.getArtistas();
         for (Artista artista:listar){
@@ -329,17 +331,5 @@ public class TelaUsuario extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     * @return the junkebox
-     */
-    public JukeboxController getJunkebox() {
-        return jukebox;
-    }
-
-    /**
-     * @param junkebox the junkebox to set
-     */
-    public void setJunkebox(JukeboxController junkebox) {
-        this.jukebox = junkebox;
-    }
+   
 }
