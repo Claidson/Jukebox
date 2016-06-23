@@ -4,7 +4,6 @@ package br.edu.ifsc.jukebox;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import javax.swing.SwingUtilities;
 import javazoom.jl.player.Player;
 
 /**

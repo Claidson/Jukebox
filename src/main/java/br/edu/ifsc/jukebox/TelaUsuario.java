@@ -7,10 +7,8 @@ package br.edu.ifsc.jukebox;
 
 import java.awt.Color;
 import java.io.File;
-import java.util.ArrayList;import java.util.TreeSet;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author Aluno
@@ -39,28 +37,27 @@ public class TelaUsuario extends javax.swing.JFrame {
         musicas = new ArrayList<>();
         m=false;
         
-        Artista novo = new Artista();
+        /*Artista novo = new Artista();
         novo.setArtista("Teste");
-        
-        
-        Artista novo2 = new Artista();
-        novo2.setArtista("Teste2");
-        
         ArrayList<Musica> novoMusicas = new ArrayList<>();
         Musica novaMusica = new Musica();
-        novaMusica.path = "C:\\Users\\Aluno\\Documents\\NetBeansProjects\\Jukebox\\src\\main\\resources\\teste.mp3";
-        novaMusica.musica = "Back";
+        novaMusica.setPath ("C:\\Users\\Aluno\\Documents\\NetBeansProjects\\Jukebox\\src\\main\\resources\\teste.mp3");
+        novaMusica.setMusica("Teste");
         novoMusicas.add(novaMusica);
         novo.setMusicas(novoMusicas);
         jukebox.addArtista(novo);
         
+        
+        Artista novo2 = new Artista();
+        novo2.setArtista("Teste2");
         ArrayList<Musica> novoMusicas2 = new ArrayList<>();
         Musica novaMusica2 = new Musica();
-        novaMusica2.path = "C:\\Users\\Aluno\\Documents\\NetBeansProjects\\Jukebox\\src\\main\\resources\\01 - Hells Bells.mp3";
-        novaMusica2.musica = "01 - Hells Bells";
+        novaMusica2.setPath("C:\\Users\\Aluno\\Documents\\NetBeansProjects\\Jukebox\\src\\main\\resources\\01 - Hells Bells.mp3");
+        novaMusica2.setMusica ("01 - Hells Bells");
         novoMusicas2.add(novaMusica2);
         novo2.setMusicas(novoMusicas2);
-        jukebox.addArtista(novo2);
+        jukebox.addArtista(novo2);*/
+        
         mostrarArtistas();
     }
 
@@ -231,8 +228,7 @@ public class TelaUsuario extends javax.swing.JFrame {
                 
                 for (Musica musica:select.getMusicas()){
                 ((DefaultListModel)(jListListaArtistas.getModel()))
-               .addElement(musica);
-                
+               .addElement(musica);                
                 m=true;
                 
                 }
@@ -242,7 +238,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         
         }else{
             Musica select = (Musica) jListListaArtistas.getSelectedValue();
-            File musica=new File(select.path);
+            File musica=new File(select.getPath());
             musicas.add(musica);
             mostrarMusicas();
            
