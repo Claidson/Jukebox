@@ -6,7 +6,6 @@
 package br.edu.ifsc.jukebox;
 
 import java.util.ArrayList;
-import java.util.TreeSet;
 
 /**
  *
@@ -14,8 +13,14 @@ import java.util.TreeSet;
  */
 public class Artista {
     private String artista;
-    private ArrayList<Musica> musicas;
+    private ArrayList<Musica> musicas = new ArrayList<>();
 
+    public Artista() {
+    }
+    
+    public void addMusica(Musica mp3){
+        musicas.add(mp3);
+    }
     public String getArtista() {
         return artista;
     }

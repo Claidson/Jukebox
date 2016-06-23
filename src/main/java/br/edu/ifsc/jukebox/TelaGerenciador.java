@@ -24,16 +24,20 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class TelaGerenciador extends javax.swing.JFrame {
 
     Artista novoArtista;
-    String mp3;
+    Musica mp3;
     JukeboxController controle;
 
     public void preencheComboBoxArtista() {
         DefaultComboBoxModel comboModel = (DefaultComboBoxModel) jCBArtistas.getModel();
         comboModel.removeAllElements();
         List<Artista> artistas = controle.getArtistas();
+        if (artistas.size() == 0) {
+            JOptionPane.showMessageDialog(this, "Nada localizado :-(\n", "Pesquisa", JOptionPane.INFORMATION_MESSAGE);
+        } //else {
         for (int i = 0; i < artistas.size(); i++) {
             Artista artista = artistas.get(i);
             comboModel.addElement(artista.getArtista());
+            //}
         }
     }
 
@@ -52,7 +56,9 @@ public class TelaGerenciador extends javax.swing.JFrame {
     public TelaGerenciador() {
         initComponents();
         controle = new JukeboxController();
-     //   preencheComboBoxArtista();
+        mp3 = new Musica();
+        novoArtista = new Artista();
+        preencheComboBoxArtista();
 
     }
 
@@ -168,9 +174,9 @@ public class TelaGerenciador extends javax.swing.JFrame {
     }//GEN-LAST:event_jCBArtistasActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        novoArtista = new Artista();
-        novoArtista.setArtista(JOptionPane.showInputDialog("Nome do artista:"));
 
+        novoArtista.setArtista(JOptionPane.showInputDialog("Nome do artista:"));
+        controle.salvar(novoArtista);
         preencheComboBoxArtista();
 
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -185,8 +191,11 @@ public class TelaGerenciador extends javax.swing.JFrame {
             File file = fileChooser.getSelectedFile();
             File copia = new File("./" + file.getName());
             copiar(file, copia);
-            mp3 = copia.getAbsolutePath();
-            jLabelTitMp3.setText(mp3.toString());
+            mp3.setPath(copia.getAbsolutePath());
+
+            mp3.setMusica(copia.getAbsolutePath() );
+
+            jLabelTitMp3.setText(mp3.getMusica());
             System.out.println("mp3 " + mp3.toString());
             JOptionPane.showMessageDialog(this, "Arquivo mp3 importado para pasta do projeto\n", "Importação", JOptionPane.INFORMATION_MESSAGE);
 
@@ -196,10 +205,13 @@ public class TelaGerenciador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSelecionaMp3ActionPerformed
 
     private void jBCadastrarMp3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarMp3ActionPerformed
-        Musica musica = new Musica();
-        musica.path = mp3;
-        //novoArtista.getMusicas().add(musica);
-        
+
+        System.out.println("mp3" + mp3.toString());
+        novoArtista.addMusica(mp3);
+        System.out.println("caminho " + mp3.getPath());
+        System.out.println("titulo " + mp3.getMusica());
+        novoArtista.setArtista(jCBArtistas.getSelectedItem().toString());
+        System.out.println("Artista " + novoArtista.getArtista().toString());
         controle.salvar(novoArtista);
         preencheComboBoxArtista();
     }//GEN-LAST:event_jBCadastrarMp3ActionPerformed

@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class JukeboxDAO {
 
-    private ArrayList<Artista> artistas;
+    private ArrayList<Artista> artistas = new ArrayList<>();
 
 
     public JukeboxDAO() {

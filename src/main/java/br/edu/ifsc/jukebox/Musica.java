@@ -10,8 +10,28 @@ package br.edu.ifsc.jukebox;
  * @author Aluno
  */
 public class Musica {
-    String musica;
-    String path;
+    private String musica;
+    private String path;
+
+    public Musica() {
+    }
+
+    public String getMusica() {
+        return musica;
+    }
+
+    public void setMusica(String musica) {
+        this.musica = musica;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+    
     @Override
  public String toString(){
      return musica;
