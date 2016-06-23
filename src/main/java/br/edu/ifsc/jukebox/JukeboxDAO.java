@@ -42,7 +42,7 @@ public class JukeboxDAO {
         try {
             //Converte String JSON para objeto Java
             Gson gson = new Gson();
-            JukeboxList listaJson = gson.fromJson(new FileReader("cartoes.json"), JukeboxList.class);
+            JukeboxList listaJson = gson.fromJson(new FileReader("Jukebox.json"), JukeboxList.class);
             artistas = listaJson.getArtistas();
         } catch (IOException e) {
             e.printStackTrace();
