@@ -1,4 +1,3 @@
-
 package br.edu.ifsc.jukebox;
 
 import com.google.gson.Gson;
@@ -15,13 +14,16 @@ public class JukeboxDAO {
 
     private ArrayList<Artista> artistas = new ArrayList<>();
 
-
     public JukeboxDAO() {
         carregarTodos();
     }
 
     public void inserir(Artista artista) {
         artistas.add(artista);
+        salvarTodos();
+    }
+
+    public void atualizar() {
         salvarTodos();
     }
 
