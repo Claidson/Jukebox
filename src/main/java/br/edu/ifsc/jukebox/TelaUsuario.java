@@ -201,7 +201,7 @@ public class TelaUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfigActionPerformed
-        new TelaGerenciador().setVisible(true);
+        new TelaGerenciador().setVisible(true);       
     }//GEN-LAST:event_jButtonConfigActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
