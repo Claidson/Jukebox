@@ -225,10 +225,9 @@ public class TelaGerenciador extends javax.swing.JFrame {
         novoArtista.addMusica(mp3);
         System.out.println("caminho " + mp3.getPath());
         System.out.println("titulo " + mp3.getMusica());
-
         System.out.println("Artista " + novoArtista.getArtista().toString());
         controle.salvar();
-        JOptionPane.showMessageDialog(this, "Musica Salva\nLet's Rock !", "Salvo", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Musica Salva\n" + novoArtista.getArtista().toString() + "\n" + mp3.getMusica() + "\nLet's Rock !", "Salvo", JOptionPane.INFORMATION_MESSAGE);
         preencheComboBoxArtista();
     }//GEN-LAST:event_jBCadastrarMp3ActionPerformed
 

@@ -98,6 +98,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jList2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("The IFSC Jukebox - Fernando- Claidson");
 
         jListListaArtistas.setModel(modelo);
         jScrollPane1.setViewportView(jListListaArtistas);
