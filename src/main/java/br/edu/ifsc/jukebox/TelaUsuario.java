@@ -6,6 +6,8 @@
 package br.edu.ifsc.jukebox;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -36,7 +38,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         indice = 0;
         musicas = new ArrayList<>();
         m=false;
-        
+        centralizarComponente();
         /*Artista novo = new Artista();
         novo.setArtista("Teste");
         ArrayList<Musica> novoMusicas = new ArrayList<>();
@@ -60,7 +62,11 @@ public class TelaUsuario extends javax.swing.JFrame {
         
         mostrarArtistas();
     }
-
+  public void centralizarComponente() {
+        Dimension ds = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension dw = getSize();
+        setLocation((ds.width - dw.width) / 2, (ds.height - dw.height) / 2);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -96,28 +102,28 @@ public class TelaUsuario extends javax.swing.JFrame {
         jListListaArtistas.setModel(modelo);
         jScrollPane1.setViewportView(jListListaArtistas);
 
-        jButton2.setText("<");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Actions-media-seek-backward-icon (1).png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setText(">");
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Actions-media-seek-forward-icon (1).png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        jButtonTocar.setText("Tocar");
+        jButtonTocar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Actions-media-playback-start-icon (1).png"))); // NOI18N
         jButtonTocar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonTocarActionPerformed(evt);
             }
         });
 
-        jButtonConfig.setText("Conf");
+        jButtonConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/settings-icon.png"))); // NOI18N
         jButtonConfig.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConfigActionPerformed(evt);
@@ -132,10 +138,10 @@ public class TelaUsuario extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Proxima");
 
-        jListTocarMusicas.setModel(modelo2);
+        jListTocarMusicas.setModel(modelo);
         jScrollPane3.setViewportView(jListTocarMusicas);
 
-        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Clock-Back-icon.png"))); // NOI18N
         jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVoltarActionPerformed(evt);
@@ -152,7 +158,7 @@ public class TelaUsuario extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 265, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 267, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -180,7 +186,7 @@ public class TelaUsuario extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(13, 13, 13)
